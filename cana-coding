@@ -1,63 +1,70 @@
+<style>
+  .accordion {
+    margin: 0;
+    padding: 0;
+  }
+
+  .accordion-section {
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .accordion-section-title {
+    display: block;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .accordion-section-content {
+    display: none;
+    padding: 15px;
+  }
+
+  .accordion-section-content p {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
 <script>
   const accordionSections = document.querySelectorAll('.accordion-section');
 
-  function toggleAccordion(event) {
-    const accordion = event.currentTarget;
-    accordion.classList.toggle('is-open');
-  }
-
   accordionSections.forEach(function (section) {
-    section.addEventListener('click', toggleAccordion);
+    section.addEventListener('click', function () {
+      // Close all accordion sections
+      accordionSections.forEach(function (s) {
+        s.classList.remove('is-open');
+        s.querySelector('.accordion-section-content').style.display = 'none';
+      });
+      // Open the clicked accordion section
+      this.classList.add('is-open');
+      this.querySelector('.accordion-section-content').style.display = 'block';
+    });
   });
 </script>
 
 <div class="accordion">
-  <div class="accordion-section">
+  <li class="accordion-section">
     <a class="accordion-section-title" href="#accordion-1">Section 1</a>
     <div id="accordion-1" class="accordion-section-content">
       <p>Content for section 1 goes here...</p>
-    </div>
-  </div>
-  <div class="accordion-section">
+  </li>
+  <li class="accordion-section">
+    <a class="accordion-section-title" href="#accordion-2">Section
+  </li>
+  <li class="accordion-section">
     <a class="accordion-section-title" href="#accordion-2">Section 2</a>
     <div id="accordion-2" class="accordion-section-content">
       <p>Content for section 2 goes here...</p>
     </div>
-  </div>
-  <div class="accordion-section">
+  </li>
+  <li class="accordion-section">
     <a class="accordion-section-title" href="#accordion-3">Section 3</a>
     <div id="accordion-3" class="accordion-section-content">
       <p>Content for section 3 goes here...</p>
     </div>
-  </div>
+  </li>
 </div>
-
-<style>
-  .accordion {
-    overflow: hidden;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
-  }
-
-  .accordion-section {
-    background-color: #f7f7f7;
-  }
-
-  .accordion-section-title {
-    padding: 20px;
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    color: #333;
-    cursor: pointer;
-  }
-
-  .accordion-section-title:hover {
-    background-color: #ddd;
-  }
-
-  .accordion-section-content {
-    padding: 20px;
-    display: none;
-  }
-</style>
