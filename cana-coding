@@ -30,39 +30,51 @@
 </style>
 
 <script>
-  const accordionSections = document.querySelectorAll('.accordion-section');
+  function addAccordionEventListeners() {
+    // Get all accordion sections
+    const accordionSections = document.querySelectorAll('.accordion-section');
 
-  accordionSections.forEach(function (section) {
-    section.addEventListener('click', function () {
-      // Close all accordion sections
-      accordionSections.forEach(function (s) {
-        s.classList.remove('is-open');
-        s.querySelector('.accordion-section-content').style.display = 'none';
-      });
-      // Open the clicked accordion section
-      this.classList.add('is-open');
-      this.querySelector('.accordion-section-content').style.display = 'block';
+    // Add a click event listener to each accordion section
+    accordionSections.forEach(section => {
+      section.addEventListener('click', toggleAccordionDropdown);
     });
-  });
+  }
+
+  // Add event listeners on page content load
+  document.addEventListener('DOMContentLoaded', addAccordionEventListeners);
+
+  function toggleAccordionDropdown() {
+    // Get the accordion section that was clicked
+    const accordionSection = this;
+    console.log(this)
+
+    // Close all accordion sections
+    const accordionSections = document.querySelectorAll('.accordion-section');
+    accordionSections.forEach(function (section) {
+      section.classList.remove('is-open');
+      section.querySelector('.accordion-section-content').style.display = 'none';
+    });
+
+    // Open the clicked accordion section
+    accordionSection.classList.add('is-open');
+    accordionSection.querySelector('.accordion-section-content').style.display = 'block';
+  }
 </script>
 
 <div class="accordion">
   <li class="accordion-section">
-    <a class="accordion-section-title" href="#accordion-1">Section 1</a>
+    <a class="accordion-section-title">Section 1</a>
     <div id="accordion-1" class="accordion-section-content">
       <p>Content for section 1 goes here...</p>
   </li>
   <li class="accordion-section">
-    <a class="accordion-section-title" href="#accordion-2">Section
-  </li>
-  <li class="accordion-section">
-    <a class="accordion-section-title" href="#accordion-2">Section 2</a>
+    <a class="accordion-section-title">Section 2</a>
     <div id="accordion-2" class="accordion-section-content">
       <p>Content for section 2 goes here...</p>
     </div>
   </li>
   <li class="accordion-section">
-    <a class="accordion-section-title" href="#accordion-3">Section 3</a>
+    <a class="accordion-section-title">Section 3</a>
     <div id="accordion-3" class="accordion-section-content">
       <p>Content for section 3 goes here...</p>
     </div>
