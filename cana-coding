@@ -10,12 +10,26 @@
   }
 
   .accordion-section-title {
-    display: block;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    text-decoration: none;
+    padding-right: 25px;
+    /* equal to or greater than width of pseudo-element */
+  }
+
+  .accordion-section-title::before {
+    content: '+';
+    /* or '-' */
+    position: absolute;
+    right: 0;
+    left: auto;
+    /* position on the right side of the .accordion-section-title element */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .accordion-section.is-open .accordion-section-title::before {
+    content: '-';
+    /* or '+' */
   }
 
   .accordion-section-content {
@@ -46,37 +60,36 @@
   function toggleAccordionDropdown() {
     // Get the accordion section that was clicked
     const accordionSection = this;
-    console.log(this)
 
-    // Close all accordion sections
-    const accordionSections = document.querySelectorAll('.accordion-section');
-    accordionSections.forEach(function (section) {
-      section.classList.remove('is-open');
-      section.querySelector('.accordion-section-content').style.display = 'none';
-    });
-
-    // Open the clicked accordion section
-    accordionSection.classList.add('is-open');
-    accordionSection.querySelector('.accordion-section-content').style.display = 'block';
+    // Check if the accordion section is already open
+    if (accordionSection.classList.contains('is-open')) {
+      // If it is open, remove the is-open class and hide the content
+      accordionSection.classList.remove('is-open');
+      accordionSection.querySelector('.accordion-section-content').style.display = 'none';
+    } else {
+      // If it is not open, add the is-open class and show the content
+      accordionSection.classList.add('is-open');
+      accordionSection.querySelector('.accordion-section-content').style.display = 'block';
+    }
   }
-</script>
 
+</script>
 <div class="accordion">
   <li class="accordion-section">
-    <a class="accordion-section-title">Section 1</a>
+    <a class="accordion-section-title">{{ product.metafields.custom.first_tab_title }}</a>
     <div id="accordion-1" class="accordion-section-content">
-      <p>Content for section 1 goes here...</p>
+      <p>{{ product.metafields.my_fields.first_tab_description }}</p>
   </li>
   <li class="accordion-section">
-    <a class="accordion-section-title">Section 2</a>
+    <a class="accordion-section-title">{{ product.metafields.my_fields.second_tab_title }}</a>
     <div id="accordion-2" class="accordion-section-content">
-      <p>Content for section 2 goes here...</p>
+      <p>{{ product.metafields.my_fields.second_tab_description }}</p>
     </div>
   </li>
   <li class="accordion-section">
-    <a class="accordion-section-title">Section 3</a>
+    <a class="accordion-section-title">{{ product.metafields.my_fields.third_tab_title }}</a>
     <div id="accordion-3" class="accordion-section-content">
-      <p>Content for section 3 goes here...</p>
+      <p>{{ product.metafields.my_fields.third_tab_description }}</p>
     </div>
   </li>
 </div>
