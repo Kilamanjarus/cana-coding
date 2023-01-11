@@ -37,8 +37,8 @@
   }
 
   .accordion-section-content {
-    font-family: "Maven Pro", "sans-serif"
-      display: none;
+    font-family: "Maven Pro", "sans-serif";
+    display: none;
     padding: 0px;
   }
 
